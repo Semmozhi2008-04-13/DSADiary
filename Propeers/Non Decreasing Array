@@ -1,0 +1,21 @@
+bool checkPossibility(vector<int>& nums) {
+    int count = 0;
+    int n = nums.size();
+    
+    for (int i = 0; i < n - 1; i++) {
+        if (nums[i] > nums[i+1]) {
+            count++;
+            if (count > 1) return false;
+
+            // Decide which number to change:
+            // If the violation happens at the start OR 
+            // if the element before the dip is small enough to fit.
+            if (i == 0 || nums[i-1] <= nums[i+1]) {
+                nums[i] = nums[i+1]; // Lower the peak
+            } else {
+                nums[i+1] = nums[i]; // Raise the valley
+            }
+        }
+    }
+    return true;
+}
